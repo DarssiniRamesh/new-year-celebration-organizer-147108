@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'event_management_frontend is being generated';
+  title = 'New Year Celebration Organizer!';
 }
