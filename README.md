@@ -1,1 +1,3 @@
-# new-year-celebration-organizer-147108
+# Project Repository
+
+This is the initial README file for the project.
