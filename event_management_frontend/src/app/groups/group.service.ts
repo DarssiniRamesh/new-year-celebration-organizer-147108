@@ -23,6 +23,7 @@ export class GroupService {
   async createGroup(name: string, userId: string): Promise<{ error: string | null }> {
     try {
       const supabase = this.supabaseService.getClient();
+      if (!supabase) return { error: 'Supabase not initialized' };
       const { data, error } = await supabase
         .from(this.GROUPS_TABLE)
         .insert([{ name, created_by: userId }])
@@ -44,6 +45,7 @@ export class GroupService {
   async listGroups(): Promise<{ error: string | null, groups: any[] }> {
     try {
       const supabase = this.supabaseService.getClient();
+      if (!supabase) return { error: 'Supabase not initialized', groups: [] };
       const { data, error } = await supabase
         .from(this.GROUPS_TABLE)
         .select('*')
@@ -61,6 +63,7 @@ export class GroupService {
   async joinGroup(groupId: string, userId: string): Promise<{ error: string | null }> {
     try {
       const supabase = this.supabaseService.getClient();
+      if (!supabase) return { error: 'Supabase not initialized' };
       const { data } = await supabase
         .from(this.MEMBERS_TABLE)
         .select('id')
@@ -84,6 +87,7 @@ export class GroupService {
   async getMyGroups(userId: string): Promise<{ error: string | null, groups: any[] }> {
     try {
       const supabase = this.supabaseService.getClient();
+      if (!supabase) return { error: 'Supabase not initialized', groups: [] };
       const { data, error } = await supabase
         .from(this.MEMBERS_TABLE)
         .select('group:groups(*)')

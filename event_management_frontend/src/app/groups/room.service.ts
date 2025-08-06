@@ -20,7 +20,9 @@ export class RoomService {
   // PUBLIC_INTERFACE
   async listRooms(): Promise<{ rooms: any[], error: string | null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { rooms: [], error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.ROOMS_TABLE)
         .select('*')
         .order('name', { ascending: true });
@@ -36,7 +38,9 @@ export class RoomService {
   // PUBLIC_INTERFACE
   async getGroupRoomSelection(groupId: string): Promise<{ roomId: string | null, locked: boolean, error: string | null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { roomId: null, locked: false, error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.SELECTIONS_TABLE)
         .select('*')
         .eq('group_id', groupId)
@@ -61,15 +65,17 @@ export class RoomService {
   // PUBLIC_INTERFACE
   async selectRoom(groupId: string, roomId: string): Promise<{ error: string | null }> {
     try {
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
       // check if already locked
-      const { data: existing } = await this.supabaseService.getClient()
+      const { data: existing } = await client
         .from(this.SELECTIONS_TABLE)
         .select('*').eq('group_id', groupId).maybeSingle();
       if (existing?.locked) {
         return { error: 'Room selection is locked for your group.' };
       }
       // Upsert or insert new selection (lock)
-      const { error } = await this.supabaseService.getClient()
+      const { error } = await client
         .from(this.SELECTIONS_TABLE)
         .upsert(
           [{ group_id: groupId, room_id: roomId, locked: true }],
@@ -87,7 +93,9 @@ export class RoomService {
   // PUBLIC_INTERFACE
   async getAllRoomSelections(): Promise<{ assignments: any[], error: string | null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { assignments: [], error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.SELECTIONS_TABLE)
         .select('group_id, room_id, locked');
       return { assignments: data || [], error: error?.message || null };

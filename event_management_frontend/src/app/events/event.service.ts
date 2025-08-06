@@ -14,7 +14,7 @@ export class EventService {
     this.supabaseService = supabaseService;
   }
   private readonly supabaseService: SupabaseService;
-// Parameter is used, keep as is.
+  // Parameter is used, keep as is.
 
   /**
    * Lists all events.
@@ -99,15 +99,17 @@ export class EventService {
   // PUBLIC_INTERFACE
   async joinEvent(eventId: string, userId: string): Promise<{ error: string | null }> {
     try {
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
       // Check if already joined
-      const { data } = await this.supabaseService.getClient()
+      const { data } = await client
         .from(this.PARTICIPANTS_TABLE)
         .select('id')
         .eq('event_id', eventId)
         .eq('user_id', userId)
         .maybeSingle();
       if (data) return { error: 'You have already joined this event.' };
-      const { error } = await this.supabaseService.getClient()
+      const { error } = await client
         .from(this.PARTICIPANTS_TABLE)
         .insert([{ event_id: eventId, user_id: userId }]);
       return { error: error?.message || null };
@@ -122,7 +124,9 @@ export class EventService {
   // PUBLIC_INTERFACE
   async leaveEvent(eventId: string, userId: string): Promise<{ error: string | null }> {
     try {
-      const { error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
+      const { error } = await client
         .from(this.PARTICIPANTS_TABLE)
         .delete()
         .eq('event_id', eventId)
@@ -138,7 +142,9 @@ export class EventService {
    */
   // PUBLIC_INTERFACE
   async isUserParticipant(eventId: string, userId: string): Promise<boolean> {
-    const { data } = await this.supabaseService.getClient()
+    const client = this.supabaseService.getClient();
+    if (!client) return false;
+    const { data } = await client
       .from(this.PARTICIPANTS_TABLE)
       .select('id')
       .eq('event_id', eventId)
@@ -153,7 +159,9 @@ export class EventService {
   // PUBLIC_INTERFACE
   async listEventParticipants(eventId: string): Promise<{ participants: any[], error: string | null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { participants: [], error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.PARTICIPANTS_TABLE)
         .select('user_id')
         .eq('event_id', eventId);
@@ -163,3 +171,4 @@ export class EventService {
     }
   }
 }
+

@@ -21,7 +21,9 @@ export class FoodPreferencesService {
   // PUBLIC_INTERFACE
   async getPreferences(eventId: string, userId: string): Promise<{ preferences: any, id?: string, error: string|null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { preferences: {}, error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.FOOD_PREFERENCES_TABLE)
         .select('*')
         .eq('event_id', eventId)
@@ -39,7 +41,9 @@ export class FoodPreferencesService {
   // PUBLIC_INTERFACE
   async savePreferences(eventId: string, userId: string, prefs: any): Promise<{ error: string|null }> {
     try {
-      const { error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
+      const { error } = await client
         .from(this.FOOD_PREFERENCES_TABLE)
         .upsert([{ event_id: eventId, user_id: userId, preferences: prefs }], { onConflict: 'event_id,user_id' });
       return { error: error?.message || null };
@@ -54,7 +58,9 @@ export class FoodPreferencesService {
   // PUBLIC_INTERFACE
   async deletePreferences(eventId: string, userId: string): Promise<{ error: string|null }> {
     try {
-      const { error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
+      const { error } = await client
         .from(this.FOOD_PREFERENCES_TABLE)
         .delete()
         .eq('event_id', eventId)
