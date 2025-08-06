@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +18,7 @@ export class PasswordResetComponent {
   success: string | null = null;
   loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService) {}
 
   // PUBLIC_INTERFACE
   async onSubmit() {
@@ -35,15 +34,6 @@ export class PasswordResetComponent {
       this.error = error;
     } else {
       this.success = "Password updated successfully! Please login.";
-      // Optional: Redirect after short delay, SSR-safe
-      let setTimeoutFn: any = undefined;
-      if (typeof globalThis !== 'undefined') {
-        setTimeoutFn = (globalThis as any).window?.setTimeout || (globalThis as any).setTimeout;
-      }
-      if (setTimeoutFn) {
-        setTimeoutFn(() => this.router.navigateByUrl('/auth/login'), 3000);
-      }
-      // SSR fallback: no redirect
     }
     this.loading = false;
   }

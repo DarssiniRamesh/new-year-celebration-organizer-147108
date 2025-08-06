@@ -6,6 +6,8 @@ import { PasswordResetRequestComponent } from './auth/password-reset-request.com
 import { PasswordResetComponent } from './auth/password-reset.component';
 
 export const routes: Routes = [
+  { path: '', loadComponent: () => import('./groups/groups.component').then(m => m.GroupsComponent) },
+  { path: 'groups', loadComponent: () => import('./groups/groups.component').then(m => m.GroupsComponent) },
   { path: 'auth/login', component: LoginComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/logout', component: LogoutComponent },

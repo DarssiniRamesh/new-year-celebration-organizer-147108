@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -18,7 +17,7 @@ export class LoginComponent {
   error: string | null = null;
   loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService) {}
 
   // PUBLIC_INTERFACE
   async onSubmit() {
@@ -27,8 +26,6 @@ export class LoginComponent {
     const { error } = await this.auth.login(this.email, this.password);
     if (error) {
       this.error = error;
-    } else {
-      await this.router.navigateByUrl('/');
     }
     this.loading = false;
   }

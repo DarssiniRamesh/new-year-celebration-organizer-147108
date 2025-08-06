@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 // PUBLIC_INTERFACE
@@ -14,11 +13,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['../app.component.css']
 })
 export class LogoutComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService) {}
 
   ngOnInit() {
-    this.auth.logout().then(() => {
-      this.router.navigateByUrl('/auth/login');
-    });
+    this.auth.logout();
   }
 }
