@@ -11,4 +11,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'New Year Celebration Organizer!';
+  sidebarOpen: boolean = false;
 }
