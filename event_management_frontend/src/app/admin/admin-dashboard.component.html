@@ -1,0 +1,19 @@
+<div class="admin-dashboard">
+  <h2>Admin/Organizer Dashboard</h2>
+  <div class="dashboard-tabs">
+    <button [class.active]="tab==='users'" (click)="tab='users'">Users</button>
+    <button [class.active]="tab==='groups'" (click)="tab='groups'">Groups</button>
+    <button [class.active]="tab==='events'" (click)="tab='events'">Events</button>
+    <button [class.active]="tab==='rooms'" (click)="tab='rooms'">Rooms</button>
+    <button [class.active]="tab==='notifications'" (click)="tab='notifications'">Bulk Notifications</button>
+  </div>
+  <div class="tab-content">
+    <ng-container [ngSwitch]="tab">
+      <app-admin-users *ngSwitchCase="'users'"></app-admin-users>
+      <app-admin-groups *ngSwitchCase="'groups'"></app-admin-groups>
+      <app-admin-events *ngSwitchCase="'events'"></app-admin-events>
+      <app-admin-rooms *ngSwitchCase="'rooms'"></app-admin-rooms>
+      <app-admin-bulk-notifications *ngSwitchCase="'notifications'"></app-admin-bulk-notifications>
+    </ng-container>
+  </div>
+</div>

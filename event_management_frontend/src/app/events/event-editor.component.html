@@ -1,0 +1,24 @@
+<form class="event-form-panel" (ngSubmit)="saveEvent()">
+  <h2>{{ isEdit ? 'Edit Event' : 'Create Event' }}</h2>
+  <label>
+    Title
+    <input type="text" [(ngModel)]="event.title" name="title" maxlength="128" required [disabled]="loading" />
+  </label>
+  <label>
+    Description
+    <textarea [(ngModel)]="event.description" name="description" rows="4" maxlength="400" required [disabled]="loading"></textarea>
+  </label>
+  <label>
+    Start Time
+    <input type="datetime-local" [(ngModel)]="event.start_time" name="start_time" required [disabled]="loading" />
+  </label>
+  <label>
+    Location
+    <input type="text" [(ngModel)]="event.location" name="location" maxlength="120" [disabled]="loading" />
+  </label>
+  <div class="form-action-row">
+    <button type="submit" [disabled]="loading">{{ isEdit ? 'Save' : 'Create' }}</button>
+    <button *ngIf="isEdit" type="button" (click)="deleteEvent()" [disabled]="loading" class="delete-btn">Delete</button>
+  </div>
+  <div *ngIf="error" class="error-text">{{ error }}</div>
+</form>

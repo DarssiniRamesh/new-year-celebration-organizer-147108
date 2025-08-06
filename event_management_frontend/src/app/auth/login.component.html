@@ -1,0 +1,14 @@
+<form class="auth-form" (ngSubmit)="onSubmit()" autocomplete="on">
+  <h2>Login</h2>
+  <label for="email">Email</label>
+  <input id="email" type="email" required [(ngModel)]="email" name="email" [disabled]="loading" autofocus />
+  <label for="password">Password</label>
+  <input id="password" type="password" required [(ngModel)]="password" name="password" [disabled]="loading" />
+  <button type="submit" [disabled]="loading">{{ loading ? 'Logging in...' : 'Login' }}</button>
+  <div *ngIf="error" style="color:#ad0101; margin-bottom: .7em; font-weight: 600;">{{ error }}</div>
+  <a class="alt-link" routerLink="/auth/reset">Forgot Password?</a>
+  <div style="margin-top:1.5rem;text-align:center;font-size:0.95em;">
+    Don&apos;t have an account?
+    <a routerLink="/auth/signup" style="color:#ad0101; font-weight: 600;">Register</a>
+  </div>
+</form>

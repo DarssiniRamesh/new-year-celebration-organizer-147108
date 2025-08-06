@@ -1,0 +1,395 @@
+/* -- Responsive, Festive, Professional Shell and Navigation -- */
+
+.festive-navbar {
+  background: linear-gradient(90deg, #ad0101 70%, #e9e7e2 100%);
+  color: #fff;
+  box-shadow: 0 8px 32px 0 rgba(173, 1, 1, 0.09);
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  min-height: 70px;
+  padding: 0.2rem 0;
+}
+
+.festive-navbar .nav-header {
+  display: flex;
+  align-items: center;
+  padding-left: 1.1rem;
+}
+
+.festive-navbar .logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 8px #eed8d8;
+  text-decoration: none;
+  outline: none !important;
+  padding-right: 1.3rem;
+  padding-top: 0.2rem;
+}
+
+.sidebar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  margin-left: 0.5em;
+  padding: 0 0.55em;
+  border-radius: 0.33em;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.sidebar-toggle:focus, .sidebar-toggle:hover {
+  background: #eed8d8;
+  color: #ad0101;
+}
+
+.festive-navbar .desktop-nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.festive-navbar .nav-links,
+.festive-navbar .auth-links {
+  display: flex;
+  gap: 0.8em;
+  align-items: center;
+}
+
+.festive-navbar .nav-links a,
+.festive-navbar .auth-links a {
+  color: #fff !important;
+  font-weight: 600;
+  text-decoration: none;
+  background: transparent;
+  border-radius: 1rem;
+  padding: 0.2rem 1.1rem;
+  font-size: 1.05rem;
+  margin-left: 0.2em;
+  margin-right: 0.2em;
+  outline: none !important;
+  transition: color .15s, background .15s;
+}
+.festive-navbar .nav-links .muted-link,
+.sidebar-nav .muted-link {
+  opacity: 0.5;
+  pointer-events: none;
+  color: #fff !important;
+  font-style: italic;
+  filter: grayscale(0.45);
+}
+
+.festive-navbar .nav-links a.active,
+.festive-navbar .nav-links a:hover,
+.festive-navbar .auth-links a.active,
+.festive-navbar .auth-links a:hover {
+  color: #ad0101 !important;
+  background: #eed8d8;
+}
+
+/* Highlight admin page */
+.festive-navbar .admin-btn,
+.sidebar-nav .admin-btn {
+  font-weight: 700;
+  background: #ad0101;
+  color: #fff !important;
+  border-radius: 1em;
+  padding: 0.2rem 1.1rem;
+}
+
+.festive-navbar .admin-btn.active,
+.festive-navbar .admin-btn:hover {
+  color: #ad0101 !important;
+  background: #eed8d8;
+}
+
+.sidebar-nav {
+  display: none;
+}
+
+.responsive-main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 950px;
+  margin: 1.5rem auto 2rem auto;
+  min-height: 80vh;
+  border-radius: 1.5rem;
+  box-shadow: 0 16px 48px 8px rgba(173, 1, 1, 0.08);
+  background: transparent;
+  padding: 0.8rem 0.6rem;
+  position: relative;
+}
+
+.mobile-titlebar {
+  display: none;
+}
+
+.app-title {
+  color: #ad0101;
+  font-weight: 600;
+  font-size: 2.2rem;
+  text-align: center;
+  letter-spacing: 2px;
+  margin: 1.2rem 0 1.5rem 0;
+  text-shadow: 1px 1px 8px #eed8d8;
+  outline: none;
+}
+
+/* --- Sidebar Navigation (shows below 900px) --- */
+.sidebar-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  min-width: 63vw;
+  max-width: 318px;
+  background: #fff;
+  box-shadow: 2px 0 22px 0 rgba(173,1,1,.13);
+  border-right: 3px solid #eed8d8;
+  padding: 2.2rem 2.2rem 1.6rem 2.2rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 1.11em;
+  transform: translateX(-115%);
+  transition: transform .21s;
+}
+.sidebar-nav.open {
+  transform: translateX(0);
+  display: flex;
+}
+.sidebar-nav a {
+  color: #ad0101 !important;
+  background: #eed8d8;
+  font-size: 1.13em;
+  font-weight: 700;
+  border-radius: 0.96em;
+  margin: 0.11em 0;
+  padding: 0.45em 1.07em;
+  text-decoration: none;
+  transition: background .14s, color .15s;
+}
+.sidebar-nav a.active,.sidebar-nav a:hover {
+  background: #ad0101;
+  color: #fff !important;
+}
+.sidebar-nav .muted-link {
+  opacity: 0.5;
+  pointer-events: none;
+  color: #ad0101 !important;
+  font-style: italic;
+  filter: grayscale(0.45);
+}
+.sidebar-nav .mobile-logo {
+  background: none !important;
+  font-size: 1.21em;
+  color: #ad0101 !important;
+  margin-bottom: .75em;
+  margin-top: -.55em;
+  box-shadow: none;
+}
+.sidebar-nav .close-btn {
+  align-self: flex-end;
+  font-size: 2.1em;
+  color: #ad0101;
+  margin-right: 0.1em;
+  margin-top: .5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1em 0.6em;
+  border-radius: 2em;
+  transition: background 0.1s;
+}
+.sidebar-nav .close-btn:focus, .sidebar-nav .close-btn:hover {
+  background: #eed8d8;
+}
+
+/* Responsive Layout and Mobile Support */
+@media (max-width: 1060px) {
+  .responsive-main-content {
+    max-width: 100vw;
+    margin: 1.5rem 1.2rem 2rem 1.2rem;
+    padding: 0.7rem 0.1rem;
+  }
+}
+@media (max-width: 900px) {
+  .festive-navbar .desktop-nav {
+    display: none;
+  }
+  .sidebar-toggle {
+    display: inline-block;
+  }
+  .mobile-titlebar {
+    display: block;
+  }
+  .sidebar-nav {
+    display: flex;
+  }
+  .responsive-main-content {
+    padding-top: 1.6rem;
+    box-shadow: 0 6px 26px 0 rgba(173,1,1,.11);
+  }
+  .app-title {
+    font-size: 1.43rem;
+    margin: 0.5rem 0 1.3rem 0;
+  }
+}
+@media (max-width: 700px) {
+  .responsive-main-content {
+    margin: 0.8rem 0.1rem 2rem 0.1rem;
+    border-radius: 1.1rem;
+    padding: 0.22rem 0.03rem;
+  }
+  .app-title {
+    font-size: 1rem;
+  }
+  .sidebar-nav {
+    min-width: 83vw;
+    padding: 1.55rem 0.65rem 1.5rem 0.7rem;
+  }
+}
+
+/* --- PAGE PANEL STYLES (also for mobile) --- */
+.admin-dashboard,
+.admin-section-card,
+.event-detail-panel,
+.event-form-panel,
+.event-list-panel,
+.group-panel,
+.room-panel,
+.food-pref-form,
+.event-notification-panel {
+  max-width: 99vw;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Existing landing panel/container tweaks for mobile */
+.container,
+.auth-form,
+.event-detail-panel,
+.event-form-panel,
+.event-list-panel,
+.group-panel,
+.room-panel,
+.admin-dashboard,
+.food-pref-form {
+  max-width: 90vw !important;
+  min-width: 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 650px) {
+  .container,
+  .auth-form,
+  .event-detail-panel,
+  .event-form-panel,
+  .event-list-panel,
+  .group-panel,
+  .room-panel,
+  .admin-dashboard,
+  .food-pref-form {
+    max-width: 100vw !important;
+    min-width: 0;
+    border-radius: 0.5rem;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+  .admin-dashboard, .admin-section-card { padding: 0.85rem 0.3rem !important; }
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #eed8d8;
+  margin: 0.5em 0;
+}
+
+/* --- Retain form, h1/h2/h3, button, and auth-form styles below as previously declared --- */
+
+h1 {
+  color: #ad0101; /* Festive red */
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  text-shadow: 1px 1px 8px #eed8d8;
+}
+
+.auth-form {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem 2.5rem;
+  margin: 2.5rem auto 2rem auto;
+  box-shadow: 0 6px 30px 0 rgba(173,1,1,.09);
+  max-width: 440px;
+  min-width: 240px;
+  border: 2px solid #eed8d8;
+}
+
+.auth-form h2 {
+  color: #ad0101;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.auth-form label {
+  display: block;
+  color: #ad0101;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #e9e7e2;
+  border-radius: 0.5rem;
+  background: #eed8d8;
+  color: #ad0101;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  width: 100%;
+  background: #ad0101;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  font-size: 1.09rem;
+  margin: 0.1rem 0 0.8rem 0;
+  transition: background 0.15s;
+}
+
+.auth-form button:hover {
+  background: #a00000;
+  color: #eed8d8;
+}
+
+.auth-form .alt-link {
+  color: #ad0101;
+  font-size: 0.99rem;
+  float: right;
+  margin-top: -0.7rem;
+}
+
+/* ... (rest unmodified) ... */

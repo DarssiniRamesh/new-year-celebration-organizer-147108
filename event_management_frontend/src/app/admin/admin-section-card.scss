@@ -1,0 +1,22 @@
+.admin-section-card {
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 1px 10px 0 rgba(173,1,1,0.07);
+  border: 2px solid #eed8d8;
+  margin-bottom: 1.18em;
+  padding: 1.4em 1.9em;
+  min-height: 210px;
+  h3 {
+    color: #ad0101;
+    margin-bottom: 1.2em;
+    font-weight: 700;
+    text-align: left;
+    font-size: 1.35rem;
+  }
+  .placeholder-text {
+    color: #bdb6b6;
+    font-size: 1.1em;
+    text-align: center;
+    margin-top: 2.2em;
+  }
+}

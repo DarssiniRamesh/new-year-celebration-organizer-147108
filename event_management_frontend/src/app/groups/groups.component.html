@@ -1,0 +1,46 @@
+<div class="group-panel">
+  <h2>Your Groups</h2>
+  <div *ngIf="myGroups && myGroups.length > 0; else nogroups" class="group-list">
+    <div class="group-card" *ngFor="let g of myGroups">
+      <span class="group-name">{{g.name}}</span>
+      <span class="group-id">#{{g.id}}</span>
+    </div>
+    <!-- Room selection for first group if user is in a group -->
+    <app-room-selection
+      *ngIf="myGroups.length > 0"
+      [groupId]="myGroups[0]?.id"
+      [isOrganizer]="false">
+    </app-room-selection>
+  </div>
+  <ng-template #nogroups>
+    <div class="hint muted">You are not in any groups yet.</div>
+  </ng-template>
+</div>
+
+<div class="group-panel">
+  <h2>Create a group</h2>
+  <form (ngSubmit)="createGroup()" class="create-form" autocomplete="off">
+    <input type="text" placeholder="Group Name" [(ngModel)]="newGroupName" name="groupName" maxlength="48" [disabled]="loading">
+    <button type="submit" [disabled]="loading||!newGroupName.trim()">Create Group</button>
+    <span *ngIf="createError" class="error-text">{{createError}}</span>
+  </form>
+</div>
+
+<div class="group-panel">
+  <h2>All Groups</h2>
+  <div *ngIf="groups && groups.length>0; else noall" class="group-list">
+    <div class="group-card" *ngFor="let g of groups">
+      <span class="group-name">{{g.name}}</span>
+      <button class="small-btn" 
+        (click)="joinGroup(g.id)"
+        [disabled]="isMemberOfGroup(g.id) || loading">
+        {{ isMemberOfGroup(g.id) ? 'Joined' : 'Join' }}
+      </button>
+      <span class="group-id">#{{g.id}}</span>
+    </div>
+  </div>
+  <ng-template #noall>
+    <div class="hint muted">No groups created yet.</div>
+  </ng-template>
+  <span *ngIf="joinError" class="error-text">{{ joinError }}</span>
+</div>

@@ -1,0 +1,82 @@
+/// SCSS Variables for Festive Red and White Theme
+$color-primary:   #ad0101;   // Deep festive red
+$color-accent:    #eed8d8;   // Soft warm accent
+$color-secondary: #e9e7e2;   // Ivory/white secondary
+
+$background-global: #ffffff;
+$text-color-main:   #ad0101;
+$text-color-header: #ad0101;
+$text-color-body:   #2e2e2e;
+$border-radius-base: 0.5rem;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: $background-global;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: $text-color-body;
+}
+
+h1, h2, h3 {
+  color: $text-color-header;
+  font-weight: 700;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.container {
+  background: linear-gradient(135deg, $color-accent 0%, $background-global 35%, $color-secondary 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button, .btn {
+  background: $color-primary;
+  color: #fff;
+  border: none;
+  border-radius: $border-radius-base;
+  padding: 0.5rem 1.75rem;
+  font-weight: 600;
+  transition: background 0.15s;
+  &:hover {
+    background: #900; /* manually darkened red (#ad0101 -> #900) */
+    color: $color-accent;
+  }
+}
+
+input, select, textarea {
+  border: 1.5px solid $color-secondary;
+  border-radius: $border-radius-base;
+  padding: 0.55rem 1rem;
+  margin-bottom: 0.6rem;
+  background: $color-accent;
+  color: $color-primary;
+}
+
+// Support for festive look (Optional: add subtle festive touches below)
+/*
+.festive-ribbon {
+  width: 100%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    $color-primary,
+    $color-primary 8px,
+    $color-accent 8px,
+    $color-accent 16px
+  );
+}
+*/

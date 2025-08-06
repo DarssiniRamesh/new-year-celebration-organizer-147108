@@ -1,0 +1,47 @@
+.admin-dashboard {
+  background: #fff;
+  border-radius: 1.3rem;
+  box-shadow: 0 4px 28px 6px rgba(173, 1, 1, 0.07);
+  border: 2.1px solid #eed8d8;
+  max-width: 880px;
+  margin: 2.5rem auto 2rem auto;
+  padding: 2.2rem 2.7rem 1.7rem 2.7rem;
+  h2 {
+    color: #ad0101;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 6px #eed8d8;
+  }
+  .dashboard-tabs {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+    button {
+      background: #e9e7e2;
+      color: #ad0101;
+      border: 1.7px solid #ad0101;
+      border-radius: 0.98rem 0.98rem 0 0;
+      padding: 0.65rem 2.1rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background 0.14s, color 0.13s;
+      cursor: pointer;
+      &.active, &:hover {
+        background: #ad0101;
+        color: #fff;
+      }
+    }
+  }
+  .tab-content {
+    min-height: 460px;
+    background: #eed8d8;
+    border-radius: 1.1rem;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 2px 11px 0 rgba(173,1,1,0.07);
+    margin-bottom: 1.22rem;
+  }
+}

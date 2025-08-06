@@ -1,0 +1,124 @@
+.group-panel {
+  background: #fff;
+  border-radius: 1.1rem;
+  padding: 2.1rem 2.2rem 1.2rem 2.2rem;
+  margin: 2rem 0 1.3rem 0;
+  box-shadow: 0 4px 18px 0 rgba(173,1,1,.06);
+  border: 2px solid #eed8d8;
+  max-width: 485px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.group-panel h2 {
+  margin-top: 0;
+  font-size: 1.55rem;
+  margin-bottom: 1.0rem;
+  font-weight: 600;
+  color: #ad0101;
+  text-align: center;
+}
+
+.create-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  input[type="text"] {
+    flex: 1 1 60%;
+    min-width: 140px;
+    background: #eed8d8;
+    color: #ad0101;
+    border: 1.5px solid #e9e7e2;
+    border-radius: 0.55em;
+    padding: 0.55em 1.1em;
+    font-size: 1.1em;
+  }
+  button {
+    flex: 0 0 auto;
+    padding: 0.55em 1.41em;
+    border-radius: 0.7rem;
+    border: none;
+    background: #ad0101;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.02em;
+    margin-left: 0.5em;
+    &:hover:enabled {
+      background: #9b0101;
+      color: #eed8d8;
+    }
+  }
+  .error-text {
+    flex-basis: 100%;
+    color: #ad0101;
+    font-size: 0.97em;
+    font-weight: 600;
+    margin-left: .5em;
+  }
+}
+
+.group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+.group-card {
+  background: #eed8d8;
+  color: #ad0101;
+  border-radius: 0.7em;
+  padding: 0.9em 1.7em;
+  font-size: 1.08em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 6px 0 rgba(173,1,1,0.04);
+  margin-bottom: 0.3em;
+
+  .group-name {
+    flex: 1 1 60%;
+    font-weight: 600;
+    font-size: 1.12em;
+    color: #ad0101;
+  }
+  .group-id {
+    color: #e9e7e2;
+    font-size: 0.93em;
+    margin-left: 1.5em;
+  }
+  .small-btn {
+    background: #fff;
+    color: #ad0101;
+    border: 1.2px solid #ad0101;
+    padding: 0.25em 1.09em;
+    font-size: 1em;
+    border-radius: 0.65em;
+    font-weight: 600;
+    transition: background 0.11s;
+    margin-right: 0.6em;
+    &:hover:enabled {
+      background: #ad0101;
+      color: #fff;
+    }
+    &:disabled {
+      opacity: 0.7;
+    }
+  }
+}
+
+.hint.muted {
+  color: #bdb6b6;
+  font-size: 1.08em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: .35em 0;
+}
+
+.error-text {
+  color: #ad0101 !important;
+  font-size: 0.99em;
+  font-weight: 600;
+}

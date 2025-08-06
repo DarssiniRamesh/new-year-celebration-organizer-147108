@@ -1,0 +1,27 @@
+<form class="food-pref-form" (ngSubmit)="onSubmit()" *ngIf="userId" autocomplete="off">
+  <h3>🍱 Food Preferences</h3>
+  <label>
+    <span>Type:</span>
+    <select [(ngModel)]="preferenceType" name="type" required [disabled]="loading||saving">
+      <option value="veg">Vegetarian</option>
+      <option value="nonveg">Non-Vegetarian</option>
+      <option value="vegan">Vegan</option>
+      <option value="other">Other</option>
+    </select>
+  </label>
+  <label>
+    <span>Allergies (optional):</span>
+    <input type="text" [(ngModel)]="allergies" name="allergies" placeholder="e.g., peanuts, dairy" [disabled]="loading||saving" maxlength="128"/>
+  </label>
+  <label>
+    <span>Notes (optional):</span>
+    <textarea [(ngModel)]="notes" name="notes" rows="2" placeholder="Special instructions" [disabled]="loading||saving" maxlength="200"></textarea>
+  </label>
+  <div class="action-row">
+    <button type="submit" [disabled]="saving||loading">{{ saving ? "Saving..." : "Save" }}</button>
+    <button type="button" class="delete-btn" (click)="onDelete()" [disabled]="deleting||loading||saving">Remove</button>
+  </div>
+  <div *ngIf="error" class="error-text">{{error}}</div>
+  <div *ngIf="savedMessage" class="success-text">{{savedMessage}}</div>
+</form>
+<div *ngIf="!userId" class="hint muted">Login to set your food preferences.</div>

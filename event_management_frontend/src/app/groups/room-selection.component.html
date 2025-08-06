@@ -1,0 +1,37 @@
+<div class="room-panel">
+  <h2>Room Selection</h2>
+  <ng-container *ngIf="busy"><span class="busy">Loading rooms…</span></ng-container>
+  <ng-container *ngIf="!busy">
+    <div *ngIf="rooms.length === 0" class="muted">No rooms available yet.</div>
+    <div *ngIf="rooms.length > 0">
+      <div class="room-list">
+        <div class="room-card" *ngFor="let r of rooms">
+          <span class="room-name">{{ r.name }}</span>
+          <span class="taken-label" *ngIf="isRoomTaken(r.id)">Taken</span>
+          <button
+            class="small-btn"
+            [disabled]="myRoomLock || isRoomTaken(r.id) || (myRoomId && myRoomId !== r.id)"
+            [class.selected]="myRoomId === r.id"
+            (click)="selectRoom(r.id)">
+            {{ myRoomId === r.id ? (myRoomLock ? 'Locked' : 'Selected') : (isRoomTaken(r.id) ? 'Taken' : 'Choose') }}
+          </button>
+        </div>
+      </div>
+      <div *ngIf="myRoomId" class="my-selection">
+        <span *ngIf="myRoomLock" class="locked-indicator">Room locked: {{ getRoomName(myRoomId) }}</span>
+        <span *ngIf="!myRoomLock" class="unlocked-indicator">You picked: {{ getRoomName(myRoomId) }} (not locked yet)</span>
+      </div>
+    </div>
+    <div *ngIf="selectError" class="error-text">{{ selectError }}</div>
+  </ng-container>
+  <div *ngIf="isOrganizer && allAssignments.length > 0" class="organizer-view">
+    <h3>Room Assignments</h3>
+    <div class="assignment-list">
+      <div *ngFor="let r of rooms">
+        <span>{{ r.name }}</span> :
+        <span *ngIf="getGroupForRoom(r.id) as groupId; else noAssign">Group #{{ groupId }}</span>
+        <ng-template #noAssign><span class="unassigned">unassigned</span></ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<form class="auth-form" (ngSubmit)="onSubmit()" autocomplete="on">
+  <h2>Create Account</h2>
+  <label for="email">Email</label>
+  <input id="email" type="email" required [(ngModel)]="email" name="email" [disabled]="loading" autofocus />
+  <label for="password">Password</label>
+  <input id="password" type="password" required minlength="6" [(ngModel)]="password" name="password" [disabled]="loading" />
+  <label for="confirmPassword">Confirm Password</label>
+  <input id="confirmPassword" type="password" required minlength="6" [(ngModel)]="confirmPassword" name="confirmPassword" [disabled]="loading" />
+  <button type="submit" [disabled]="loading">{{ loading ? 'Registering...' : 'Register' }}</button>
+  <div *ngIf="error" style="color:#ad0101; margin-bottom:.7em; font-weight: 600;">{{ error }}</div>
+  <div *ngIf="success" style="color:green; margin-bottom: .7em; font-weight: 600;">{{ success }}</div>
+  <div style="margin-top:1.5rem;text-align:center;font-size:0.95em;">
+    Already have an account?
+    <a routerLink="/auth/login" style="color:#ad0101; font-weight: 600;">Login</a>
+  </div>
+</form>
