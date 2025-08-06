@@ -11,6 +11,12 @@
     <button *ngIf="joined" (click)="leaveEvent()" [disabled]="loading" class="leave-btn">Leave Event</button>
     <button *ngIf="isOrganizer" (click)="editEvent()" class="edit-btn">Edit</button>
   </div>
+  <div *ngIf="isOrganizer && eventId">
+    <app-event-notification-panel 
+      [eventId]="eventId"
+      [isOrganizer]="isOrganizer">
+    </app-event-notification-panel>
+  </div>
   <div *ngIf="error" class="error-text">{{ error }}</div>
   <div class="event-participants">
     <span class="participants-label">Joined:</span>

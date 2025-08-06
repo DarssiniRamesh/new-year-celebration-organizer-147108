@@ -11,7 +11,10 @@ export class GroupService {
   private GROUPS_TABLE = 'groups';
   private MEMBERS_TABLE = 'group_members';
 
-  constructor(private supabaseService: SupabaseService) {}
+  private readonly supabaseService: SupabaseService;
+  constructor(supabaseService: SupabaseService) {
+    this.supabaseService = supabaseService;
+  }
 
   /**
    * Creates a new group with the given name. Associates current user as creator/member.

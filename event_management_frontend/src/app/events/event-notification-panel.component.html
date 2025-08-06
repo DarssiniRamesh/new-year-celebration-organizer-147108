@@ -1,0 +1,14 @@
+<div class="event-notification-panel" *ngIf="eventId && isOrganizer">
+  <div class="notif-panel-header">
+    <span class="notif-title">📧 Event Notifications</span>
+  </div>
+  <div class="notif-stats">
+    <span class="sent">Sent: <strong>{{sentCount}}</strong></span>
+    <span class="pending">Pending: <strong>{{pendingCount}}</strong></span>
+    <button class="notify-btn" (click)="sendNotifications()" [disabled]="loading">
+      {{loading ? 'Sending...' : (pendingCount > 0 ? 'Bulk Notify Again' : 'Send Notifications')}}
+    </button>
+  </div>
+  <div *ngIf="error" class="error-text">{{error}}</div>
+  <div *ngIf="info" class="success-text">{{info}}</div>
+</div>

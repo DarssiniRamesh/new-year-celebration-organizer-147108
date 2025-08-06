@@ -4,11 +4,12 @@ import { EventService } from './event.service';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FoodPreferencesComponent } from './food-preferences.component';
+import { EventNotificationPanelComponent } from './event-notification-panel.component';
 
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, FoodPreferencesComponent],
+  imports: [CommonModule, RouterModule, FoodPreferencesComponent, EventNotificationPanelComponent],
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.scss']
 })
