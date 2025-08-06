@@ -18,3 +18,9 @@ window.NG_APP_SUPABASE_URL = window.NG_APP_SUPABASE_URL || "REPLACE_ME_SUPABASE_
 window.NG_APP_SUPABASE_KEY = window.NG_APP_SUPABASE_KEY || "REPLACE_ME_SUPABASE_KEY";
 // Add further runtime env vars below as needed
 // END ENV VARS
+
+// DEBUG: Log env var assignment to console for troubleshooting SSR/runtime variable injection
+if (typeof window !== 'undefined') {
+  console.log('[env.js] NG_APP_SUPABASE_URL:', window.NG_APP_SUPABASE_URL);
+  console.log('[env.js] NG_APP_SUPABASE_KEY:', window.NG_APP_SUPABASE_KEY ? '[present]' : '[absent]');
+}
