@@ -18,6 +18,26 @@
   text-shadow: 0 2px 8px #eed8d8;
 }
 
+.festive-navbar .nav-links {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.festive-navbar .nav-links a {
+  color: #fff !important;
+  margin-left: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .15s;
+  background: transparent;
+  padding: 0.2rem 1.1rem;
+  border-radius: 1rem;
+}
+.festive-navbar .nav-links a.active,
+.festive-navbar .nav-links a:hover {
+  color: #ad0101 !important;
+  background: #eed8d8;
+}
+
 .festive-navbar .auth-links a {
   color: #fff;
   margin-left: 1.4rem;

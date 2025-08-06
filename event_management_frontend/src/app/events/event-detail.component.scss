@@ -1,0 +1,87 @@
+.event-detail-panel {
+  background: #fff;
+  border-radius: 1.2rem;
+  padding: 2.3rem 2.9rem;
+  margin: 2.3rem auto;
+  box-shadow: 0 2px 21px 0 rgba(173,1,1,0.13);
+  border: 2px solid #eed8d8;
+  max-width: 600px;
+  h2 {
+    text-align: center;
+    color: #ad0101;
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: .8rem;
+  }
+  .event-meta {
+    font-size: 1.06em;
+    color: #7c2400;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.1em;
+    span { margin-bottom: .3em; }
+  }
+  .event-desc {
+    color: #ad0101;
+    font-size: 1.16em;
+    font-weight: 400;
+    margin-bottom: 1.3em;
+    background: #eed8d8;
+    border-radius: .5em;
+    padding: .8em 1.3em;
+  }
+  .event-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-bottom: 1.2em;
+    .join-btn, .leave-btn, .edit-btn {
+      font-size: 1.09em;
+      font-weight: 600;
+      border-radius: .8em;
+      border: none;
+      padding: .37em 2.2em;
+      cursor: pointer;
+      outline: none;
+      background: #ad0101;
+      color: #fff;
+      transition: background 0.13s, color 0.13s;
+    }
+    .leave-btn { background: #c40404; }
+    .edit-btn { background: #e9e7e2; color: #ad0101; border: 1.2px solid #ad0101;}
+    .join-btn:hover { background: #920101; color: #eed8d8;}
+    .leave-btn:hover { background: #900; color: #eed8d8;}
+    .edit-btn:hover { background: #ad0101; color: #fff;}
+  }
+  .event-participants {
+    margin-top: 2em;
+    .participants-label {
+      font-weight: 700;
+      color: #ad0101;
+      margin-right: .67em;
+    }
+    .participant {
+      background: #ad0101;
+      color: #fff;
+      border-radius: .63em;
+      padding: .18em 1.11em;
+      font-size: .98em;
+      margin-right: .65em;
+      font-weight: 600;
+      display: inline-block;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,0.01);
+    }
+  }
+  .error-text {
+    color: #ad0101;
+    font-weight: 700;
+    background: #eed8d8;
+    border-radius: .4em;
+    padding: .5em 1em;
+    text-align: center;
+    margin-top: 1.4em;
+    margin-bottom: 1.1em;
+    font-size: 1.06em;
+  }
+}

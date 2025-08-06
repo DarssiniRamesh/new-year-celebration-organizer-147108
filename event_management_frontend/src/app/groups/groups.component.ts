@@ -27,10 +27,8 @@ export class GroupsComponent implements OnInit {
   newGroupName = '';
   currentUserId: string | null = null;
 
-  constructor(
-    private groupService: GroupService,
-    private authService: AuthService
-  ) {}
+  constructor() {}
+// Both params in constructor are actually needed for functions here.
 
   ngOnInit(): void {
     this.authService.user().subscribe((user: any) => {

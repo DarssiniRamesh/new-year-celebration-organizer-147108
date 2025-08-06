@@ -1,0 +1,19 @@
+<div class="event-detail-panel" *ngIf="event">
+  <h2>{{ event.title }}</h2>
+  <div class="event-meta">
+    <span>Time: <strong>{{ event.start_time | date:'medium' }}</strong></span>
+    <span>Organized by: {{ event.organizer_name || event.created_by }}</span>
+    <span *ngIf="event.location">📍 {{ event.location }}</span>
+  </div>
+  <div class="event-desc">{{ event.description }}</div>
+  <div class="event-actions">
+    <button *ngIf="!joined" (click)="joinEvent()" [disabled]="loading" class="join-btn">Join Event</button>
+    <button *ngIf="joined" (click)="leaveEvent()" [disabled]="loading" class="leave-btn">Leave Event</button>
+    <button *ngIf="isOrganizer" (click)="editEvent()" class="edit-btn">Edit</button>
+  </div>
+  <div *ngIf="error" class="error-text">{{ error }}</div>
+  <div class="event-participants">
+    <span class="participants-label">Joined:</span>
+    <span *ngFor="let part of participants" class="participant">{{ part.user_id || '-' }}</span>
+  </div>
+</div>

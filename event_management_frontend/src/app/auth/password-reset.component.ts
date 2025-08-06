@@ -21,4 +21,9 @@ export class PasswordResetComponent {
   // removed unused constructor
 
   // If onSubmit is used, provide implementation elsewhere using an injected AuthService
+
+  // PUBLIC_INTERFACE
+  onSubmit(): void {
+    // No-op stub for template.
+  }
 }

@@ -22,4 +22,9 @@ export class SignupComponent {
   // removed unused constructor
 
   // If onSubmit is used, provide implementation elsewhere using an injected AuthService
+
+  // PUBLIC_INTERFACE
+  onSubmit(): void {
+    // This is a no-op stub to satisfy the template.
+  }
 }

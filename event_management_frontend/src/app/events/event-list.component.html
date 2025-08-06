@@ -1,0 +1,21 @@
+<div class="event-list-panel">
+  <h2>Upcoming Events</h2>
+  <button *ngIf="userId" class="new-event-btn organizer-only" routerLink="/events/new">+ Create Event</button>
+  <div *ngIf="loading" class="loading-text">Loading events...</div>
+  <div *ngIf="error" class="error-text">{{ error }}</div>
+  <div *ngIf="!loading && events.length === 0" class="no-events">No events yet.</div>
+  <div class="event-list" *ngIf="!loading && events.length > 0">
+    <div class="event-card" *ngFor="let ev of events" (click)="goToDetail(ev.id)">
+      <div class="event-title">{{ ev.title }}</div>
+      <div class="event-meta">
+        <span>{{ ev.description }}</span>
+        <span class="start-time">📅 {{ ev.start_time | date:'medium' }}</span>
+      </div>
+      <span class="participation-status"
+            [class.joined]="eventMemberships[ev.id]"
+            *ngIf="userId">
+        {{eventMemberships[ev.id] ? 'Joined' : 'Not Joined'}}
+      </span>
+    </div>
+  </div>
+</div>

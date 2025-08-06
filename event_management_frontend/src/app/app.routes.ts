@@ -5,9 +5,16 @@ import { LogoutComponent } from './auth/logout.component';
 import { PasswordResetRequestComponent } from './auth/password-reset-request.component';
 import { PasswordResetComponent } from './auth/password-reset.component';
 
+// Event components lazy standalone
 export const routes: Routes = [
   { path: '', loadComponent: () => import('./groups/groups.component').then(m => m.GroupsComponent) },
   { path: 'groups', loadComponent: () => import('./groups/groups.component').then(m => m.GroupsComponent) },
+  // Event views:
+  { path: 'events', loadComponent: () => import('./events/event-list.component').then(m => m.EventListComponent) },
+  { path: 'events/new', loadComponent: () => import('./events/event-editor.component').then(m => m.EventEditorComponent) },
+  { path: 'events/:eventId', loadComponent: () => import('./events/event-detail.component').then(m => m.EventDetailComponent) },
+  { path: 'events/:eventId/edit', loadComponent: () => import('./events/event-editor.component').then(m => m.EventEditorComponent) },
+  // Auth...
   { path: 'auth/login', component: LoginComponent },
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/logout', component: LogoutComponent },

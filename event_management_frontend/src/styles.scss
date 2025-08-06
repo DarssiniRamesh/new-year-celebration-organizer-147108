@@ -52,7 +52,7 @@ button, .btn {
   font-weight: 600;
   transition: background 0.15s;
   &:hover {
-    background: adjust-color($color-primary, $lightness: -10%);
+    background: #900; /* manually darkened red (#ad0101 -> #900) */
     color: $color-accent;
   }
 }
