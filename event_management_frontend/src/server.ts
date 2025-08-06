@@ -68,10 +68,14 @@ app.get('**', (req, res, next) => {
 /**
  * Start the server if this module is the main entry point.
  * The server listens on the port defined by the `PORT` environment variable, or defaults to 3000.
+ * To override, set process.env.PORT.
+ * This file is the main entry point for SSR when running "npm start" (see package.json).
  */
 if (isMainModule(import.meta.url)) {
-  const port = process.env['PORT'] || 3000;
-  app.listen(port, () => {
+  // Always bind to 0.0.0.0 so container system can access, using PORT or 3000 as fallback.
+  // Parse port as integer to avoid "string | number" type error.
+  const port = process.env['PORT'] ? parseInt(process.env['PORT'], 10) : 3000;
+  app.listen(port, '0.0.0.0', () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }

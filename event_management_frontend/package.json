@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 3000 --no-hmr --disable-host-check",
+    "start": "npm run build:ssr:angular && node dist/angular/server/server.mjs",
+    "dev:ssr": "ng run angular:serve-ssr",
+    "build:ssr:angular": "ng build --configuration=production && ng run angular:server:production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
