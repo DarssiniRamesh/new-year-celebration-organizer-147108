@@ -1,6 +1,12 @@
-# Angular
+# Angular Event Management Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+This project provides user authentication and event management UI for New Year celebrations, built with Angular and Supabase.
+
+## Authentication
+
+- Signup, Login, Logout, Password Reset, and Session management use Supabase Auth.
+- Festive, professional red/white forms, standalone components, and routing included.
+- Env vars: `NG_APP_SUPABASE_URL` and `NG_APP_SUPABASE_KEY` must be set for API calls (see Supabase notes and `.env`).
 
 ## Development server
 

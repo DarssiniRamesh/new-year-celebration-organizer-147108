@@ -1,14 +1,53 @@
+.festive-navbar {
+  background: linear-gradient(90deg, #ad0101 70%, #e9e7e2 100%);
+  color: #fff;
+  padding: 1.25rem 1.8rem 1rem 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(173, 1, 1, 0.09);
+}
+
+.festive-navbar .logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 8px #eed8d8;
+}
+
+.festive-navbar .auth-links a {
+  color: #fff;
+  margin-left: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.festive-navbar .auth-links a.active, 
+.festive-navbar .auth-links a:hover {
+  color: #ad0101;
+  background: #eed8d8;
+  padding: 0.2rem 1.1rem;
+  border-radius: 1rem;
+}
+
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 90vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-height: 80vh;
   background: transparent;
   border-radius: 1.5rem;
   box-shadow: 0 16px 48px 8px rgba(173, 1, 1, 0.08);
-  max-width: 720px;
+  max-width: 520px;
   margin: 2rem auto;
+  padding-top: 3rem;
 }
+
 
 h1 {
   color: #ad0101; /* Festive red */
@@ -18,4 +57,66 @@ h1 {
   text-align: center;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   text-shadow: 1px 1px 8px #eed8d8;
+}
+
+.auth-form {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem 2.5rem;
+  margin: 2.5rem auto 2rem auto;
+  box-shadow: 0 6px 30px 0 rgba(173,1,1,.09);
+  max-width: 440px;
+  min-width: 240px;
+  border: 2px solid #eed8d8;
+}
+
+.auth-form h2 {
+  color: #ad0101;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.auth-form label {
+  display: block;
+  color: #ad0101;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.55rem 1rem;
+  margin-bottom: 1rem;
+  border: 1.5px solid #e9e7e2;
+  border-radius: 0.5rem;
+  background: #eed8d8;
+  color: #ad0101;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  width: 100%;
+  background: #ad0101;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  font-size: 1.09rem;
+  margin: 0.1rem 0 0.8rem 0;
+  transition: background 0.15s;
+}
+
+.auth-form button:hover {
+  background: #a00000;
+  color: #eed8d8;
+}
+
+.auth-form .alt-link {
+  color: #ad0101;
+  font-size: 0.99rem;
+  float: right;
+  margin-top: -0.7rem;
 }

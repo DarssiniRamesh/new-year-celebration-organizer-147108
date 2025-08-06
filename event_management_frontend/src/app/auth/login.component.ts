@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+// PUBLIC_INTERFACE
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['../app.component.css']
+})
+export class LoginComponent {
+  email = '';
+  password = '';
+  error: string | null = null;
+  loading = false;
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  // PUBLIC_INTERFACE
+  async onSubmit() {
+    this.loading = true;
+    this.error = null;
+    const { error } = await this.auth.login(this.email, this.password);
+    if (error) {
+      this.error = error;
+    } else {
+      await this.router.navigateByUrl('/');
+    }
+    this.loading = false;
+  }
+}
