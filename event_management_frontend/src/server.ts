@@ -25,6 +25,18 @@ const commonEngine = new CommonEngine();
  */
 
 /**
+ * Inject env.js script at runtime for SSR/static and browser builds.
+ * This ensures Supabase env vars (NG_APP_SUPABASE_URL, NG_APP_SUPABASE_KEY) are accessible for Angular in all modes.
+ */
+app.get('/assets/env.js', (req, res) => {
+  const SUPABASE_URL = process.env['NG_APP_SUPABASE_URL'] || 'REPLACE_ME_SUPABASE_URL';
+  const SUPABASE_KEY = process.env['NG_APP_SUPABASE_KEY'] || 'REPLACE_ME_SUPABASE_KEY';
+  res.type('application/javascript').send(
+    `window.NG_APP_SUPABASE_URL = "${SUPABASE_URL}";\nwindow.NG_APP_SUPABASE_KEY = "${SUPABASE_KEY}";\n`
+  );
+});
+
+/**
  * Serve static files from /browser
  */
 app.get(

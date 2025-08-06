@@ -8,6 +8,31 @@ This project provides user authentication and event management UI for New Year c
 - Festive, professional red/white forms, standalone components, and routing included.
 - Env vars: `NG_APP_SUPABASE_URL` and `NG_APP_SUPABASE_KEY` must be set for API calls (see Supabase notes and `.env`).
 
+### Angular Environment Variable Injection (SSR/Static/Runtime)
+
+**How it works:**  
+- This app uses `assets/env.js` and code in `src/app/supabase.service.ts` for robust supabase variable handling (supports SSR/server/static!).
+- These environment variables must be injected for both browser and server builds:
+  - In **local/dev**, set `.env`, and run a script (or build step) that writes the correct env values to `assets/env.js`.
+  - In **production/SSR**, the server (`src/server.ts`) responds with `assets/env.js` using its runtime `process.env` values.
+  - If not set, app will show a clear message about missing Supabase setup.
+
+**To configure:**
+1. Set `NG_APP_SUPABASE_URL` and `NG_APP_SUPABASE_KEY` as environment variables:
+   - Locally: in a `.env` file or as shell variables
+   - With Docker/Node: pass via environment to the server process
+2. Ensure `assets/env.js` contains these at build/runtime.  
+   - To automate this in local/dev:
+     ```bash
+     # Example bash: fill env.js from .env or local values
+     echo "window.NG_APP_SUPABASE_URL = 'YOUR_URL';" > assets/env.js
+     echo "window.NG_APP_SUPABASE_KEY = \"YOUR_KEY\";" >> assets/env.js
+     ```
+   - In Docker/hosting, update `src/server.ts` for SSR injection (already enabled).
+
+**Troubleshooting:**
+- If you see "App Initialization Required" about missing Supabase config, check that env.js is correctly set and the variables are present in your environment.
+
 ## Development server
 
 To start a local development server, run:
