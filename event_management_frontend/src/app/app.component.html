@@ -1,45 +1,61 @@
 <!-- Responsive App Shell with unified festive/professional navbar/sidebar layout -->
 
-<nav class="festive-navbar" aria-label="Main site navigation">
-  <div class="nav-header">
-    <a routerLink="/" class="logo">🎉 NYE Home</a>
-    <button id="sidebar-toggle" (click)="sidebarOpen = !sidebarOpen" aria-label="Menu" class="sidebar-toggle">
-      <span aria-hidden="true">&#9776;</span>
-    </button>
+<!-- Show fallback placeholder if Supabase is not configured (SSR/prerender/static build) -->
+<div *ngIf="!supabaseAvailable" class="supabase-unavailable" style="padding:3em;text-align:center;max-width:500px;margin:5em auto 2em auto;">
+  <h2 style="color:#ad0101;">App Initialization Required</h2>
+  <div style="margin-top:1.7em;font-size:1.11em;color:#6c2323;">
+    This application requires Supabase environment configuration (NG_APP_SUPABASE_URL, NG_APP_SUPABASE_KEY).<br />
+    Please set up the required environment variables and reload this app in a browser.<br />
+    <span style="font-size:0.99em;color:#ad010170">[SSR/static previews unavailable]</span>
   </div>
-  <div class="desktop-nav">
-    <span class="nav-links">
-      <a routerLink="/groups" routerLinkActive="active">Groups</a>
-      <a routerLink="/events" routerLinkActive="active">Events</a>
-      <a routerLink="/admin" routerLinkActive="active" class="admin-btn">Admin</a>
-    </span>
-    <span class="auth-links">
-      <a routerLink="/auth/login" routerLinkActive="active">Login</a>
-      <a routerLink="/auth/signup" routerLinkActive="active">Register</a>
-      <a routerLink="/auth/reset" routerLinkActive="active">Reset Password</a>
-      <a routerLink="/auth/logout" routerLinkActive="active">Logout</a>
-    </span>
+</div>
+<div *ngIf="supabaseAvailable">
+  <!-- Responsive App Shell with unified festive/professional navbar/sidebar layout -->
+  <nav class="festive-navbar" aria-label="Main site navigation">
+    <div class="nav-header">
+      <a routerLink="/" class="logo">🎉 NYE Home</a>
+      <button id="sidebar-toggle" (click)="sidebarOpen = !sidebarOpen" aria-label="Menu" class="sidebar-toggle">
+        <span aria-hidden="true">&#9776;</span>
+      </button>
+    </div>
+    <div class="desktop-nav">
+      <span class="nav-links">
+        <a routerLink="/groups" routerLinkActive="active" *ngIf="userLoggedIn">Groups</a>
+        <a routerLink="/groups" routerLinkActive="active" *ngIf="!userLoggedIn" class="muted-link">Groups</a>
+        <a routerLink="/events" routerLinkActive="active">Events</a>
+        <a routerLink="/food-preferences" routerLinkActive="active" *ngIf="userLoggedIn">Food Preferences</a>
+        <a routerLink="/admin" routerLinkActive="active" class="admin-btn" *ngIf="showAdmin">Admin</a>
+      </span>
+      <span class="auth-links">
+        <a routerLink="/auth/login" routerLinkActive="active" *ngIf="!userLoggedIn">Login</a>
+        <a routerLink="/auth/signup" routerLinkActive="active" *ngIf="!userLoggedIn">Register</a>
+        <a routerLink="/auth/reset" routerLinkActive="active" *ngIf="!userLoggedIn">Reset Password</a>
+        <a routerLink="/auth/logout" routerLinkActive="active" *ngIf="userLoggedIn">Logout</a>
+      </span>
+    </div>
+  </nav>
+
+  <aside class="sidebar-nav" [class.open]="sidebarOpen" aria-label="Sidebar Navigation" *ngIf="sidebarOpen">
+    <a routerLink="/" class="logo mobile-logo" (click)="sidebarOpen = false">🎉 NYE Home</a>
+    <a routerLink="/groups" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="userLoggedIn">Groups</a>
+    <a routerLink="/groups" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="!userLoggedIn" class="muted-link">Groups</a>
+    <a routerLink="/events" routerLinkActive="active" (click)="sidebarOpen = false">Events</a>
+    <a routerLink="/food-preferences" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="userLoggedIn">Food Preferences</a>
+    <a routerLink="/admin" routerLinkActive="active" (click)="sidebarOpen = false" class="admin-btn" *ngIf="showAdmin">Admin</a>
+    <hr />
+    <a routerLink="/auth/login" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="!userLoggedIn">Login</a>
+    <a routerLink="/auth/signup" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="!userLoggedIn">Register</a>
+    <a routerLink="/auth/reset" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="!userLoggedIn">Reset Password</a>
+    <a routerLink="/auth/logout" routerLinkActive="active" (click)="sidebarOpen = false" *ngIf="userLoggedIn">Logout</a>
+    <button class="close-btn" (click)="sidebarOpen = false" aria-label="Close menu">&times;</button>
+  </aside>
+
+  <div class="responsive-main-content" (click)="sidebarOpen = false">
+    <header class="mobile-titlebar">
+      <h1 tabindex="0" class="app-title">{{ title }}</h1>
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
   </div>
-</nav>
-
-<aside class="sidebar-nav" [class.open]="sidebarOpen" aria-label="Sidebar Navigation" *ngIf="sidebarOpen">
-  <a routerLink="/" class="logo mobile-logo" (click)="sidebarOpen = false">🎉 NYE Home</a>
-  <a routerLink="/groups" routerLinkActive="active" (click)="sidebarOpen = false">Groups</a>
-  <a routerLink="/events" routerLinkActive="active" (click)="sidebarOpen = false">Events</a>
-  <a routerLink="/admin" routerLinkActive="active" (click)="sidebarOpen = false" class="admin-btn">Admin</a>
-  <hr />
-  <a routerLink="/auth/login" routerLinkActive="active" (click)="sidebarOpen = false">Login</a>
-  <a routerLink="/auth/signup" routerLinkActive="active" (click)="sidebarOpen = false">Register</a>
-  <a routerLink="/auth/reset" routerLinkActive="active" (click)="sidebarOpen = false">Reset Password</a>
-  <a routerLink="/auth/logout" routerLinkActive="active" (click)="sidebarOpen = false">Logout</a>
-  <button class="close-btn" (click)="sidebarOpen = false" aria-label="Close menu">&times;</button>
-</aside>
-
-<div class="responsive-main-content" (click)="sidebarOpen = false">
-  <header class="mobile-titlebar">
-    <h1 tabindex="0" class="app-title">{{ title }}</h1>
-  </header>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
 </div>

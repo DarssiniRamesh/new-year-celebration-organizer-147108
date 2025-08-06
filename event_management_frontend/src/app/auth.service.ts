@@ -15,16 +15,19 @@ export class AuthService {
 
   // eslint-disable-next-line no-unused-vars
   constructor(private supabaseService: SupabaseService) {
-    // Set up listener for auth changes.
-    this.supabaseService.getClient().auth.onAuthStateChange((event, session) => {
-      this.session$.next(session);
-      this.user$.next(session?.user ?? null);
-    });
-    // Try to get current session on load.
-    this.supabaseService.getClient().auth.getSession().then(({ data: { session } }) => {
-      this.session$.next(session);
-      this.user$.next(session?.user ?? null);
-    });
+    // SSR/static: Only set up listener if client available.
+    const client = this.supabaseService.getClient();
+    if (client) {
+      client.auth.onAuthStateChange((event, session) => {
+        this.session$.next(session);
+        this.user$.next(session?.user ?? null);
+      });
+      // Try to get current session on load.
+      client.auth.getSession().then(({ data: { session } }) => {
+        this.session$.next(session);
+        this.user$.next(session?.user ?? null);
+      });
+    }
   }
 
   /**
@@ -57,7 +60,11 @@ export class AuthService {
         emailRedirectTo = getLocation.origin + '/auth/callback';
       }
     }
-    const { error } = await this.supabaseService.getClient().auth.signUp({
+    const client = this.supabaseService.getClient();
+    if (!client) {
+      return { error: 'Supabase not initialized' };
+    }
+    const { error } = await client.auth.signUp({
       email,
       password,
       options: {
@@ -72,7 +79,9 @@ export class AuthService {
    */
   // PUBLIC_INTERFACE
   async login(email: string, password: string): Promise<{ error: string | null }> {
-    const { error } = await this.supabaseService.getClient().auth.signInWithPassword({ email, password });
+    const client = this.supabaseService.getClient();
+    if (!client) return { error: 'Supabase not initialized' };
+    const { error } = await client.auth.signInWithPassword({ email, password });
     return { error: error?.message || null };
   }
 
@@ -81,7 +90,9 @@ export class AuthService {
    */
   // PUBLIC_INTERFACE
   async logout(): Promise<void> {
-    await this.supabaseService.getClient().auth.signOut();
+    const client = this.supabaseService.getClient();
+    if (!client) return;
+    await client.auth.signOut();
   }
 
   /**
@@ -97,7 +108,9 @@ export class AuthService {
         redirectTo = getLocation.origin + '/auth/callback';
       }
     }
-    const { error } = await this.supabaseService.getClient().auth.resetPasswordForEmail(email, {
+    const client = this.supabaseService.getClient();
+    if (!client) return { error: 'Supabase not initialized' };
+    const { error } = await client.auth.resetPasswordForEmail(email, {
       redirectTo
     });
     return { error: error?.message || null };
@@ -108,7 +121,9 @@ export class AuthService {
    */
   // PUBLIC_INTERFACE
   async resetPassword(newPassword: string): Promise<{ error: string | null }> {
-    const { error } = await this.supabaseService.getClient().auth.updateUser({
+    const client = this.supabaseService.getClient();
+    if (!client) return { error: 'Supabase not initialized' };
+    const { error } = await client.auth.updateUser({
       password: newPassword
     });
     return { error: error?.message || null };

@@ -22,7 +22,9 @@ export class EventService {
   // PUBLIC_INTERFACE
   async listEvents(): Promise<{ events: any[], error: string | null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { events: [], error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.EVENTS_TABLE)
         .select('*')
         .order('start_time', { ascending: true });
@@ -38,7 +40,9 @@ export class EventService {
   // PUBLIC_INTERFACE
   async getEvent(eventId: string): Promise<{ event: any, error: string | null }> {
     try {
-      const { data, error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { event: null, error: 'Supabase not initialized' };
+      const { data, error } = await client
         .from(this.EVENTS_TABLE)
         .select('*')
         .eq('id', eventId)
@@ -56,9 +60,11 @@ export class EventService {
   // PUBLIC_INTERFACE
   async upsertEvent(event: any): Promise<{ id?: string, error: string | null }> {
     try {
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
       let record = { ...event };
       // Upsert: uses PK 'id' (if exists, update)
-      const { data, error } = await this.supabaseService.getClient()
+      const { data, error } = await client
         .from(this.EVENTS_TABLE)
         .upsert([record])
         .select()
@@ -75,7 +81,9 @@ export class EventService {
   // PUBLIC_INTERFACE
   async deleteEvent(eventId: string): Promise<{ error: string | null }> {
     try {
-      const { error } = await this.supabaseService.getClient()
+      const client = this.supabaseService.getClient();
+      if (!client) return { error: 'Supabase not initialized' };
+      const { error } = await client
         .from(this.EVENTS_TABLE)
         .delete()
         .eq('id', eventId);

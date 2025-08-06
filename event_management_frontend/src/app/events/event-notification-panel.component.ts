@@ -39,6 +39,12 @@ export class EventNotificationPanelComponent implements OnInit {
     // Query the notifications status in Supabase
     try {
       const client = this.supabaseService.getClient();
+      if (!client) {
+        this.sentCount = 0;
+        this.pendingCount = 0;
+        this.error = 'Email notifications require Supabase to be configured.';
+        return;
+      }
       // Get sent and pending counts
       const { count: sentCount } = await client
         .from('notifications')
@@ -66,6 +72,11 @@ export class EventNotificationPanelComponent implements OnInit {
     this.loading = true; this.error = null; this.info = null;
     try {
       const client = this.supabaseService.getClient();
+      if (!client) {
+        this.error = 'Supabase is not configured for sending notifications.';
+        this.loading = false;
+        return;
+      }
       // Find participants; for each, insert into notifications if not exists and not sent
       const { data: parts, error: findErr } = await client
         .from('event_participants')

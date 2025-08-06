@@ -26,22 +26,43 @@ function getEnvVar(name: string): string | undefined {
   providedIn: 'root'
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  private supabase: SupabaseClient | null = null;
+  private _url: string | undefined;
+  private _key: string | undefined;
 
   constructor() {
-    const url = getEnvVar('NG_APP_SUPABASE_URL') || '';
-    const key = getEnvVar('NG_APP_SUPABASE_KEY') || '';
-    if (!url || !key) {
-      throw new Error('Supabase environment variables not set');
+    this._url = getEnvVar('NG_APP_SUPABASE_URL');
+    this._key = getEnvVar('NG_APP_SUPABASE_KEY');
+    if (this._url && this._key) {
+      this.supabase = createClient(this._url, this._key);
+    } else {
+      this.supabase = null;
+      if (typeof console !== 'undefined') {
+        console.warn('Supabase: environment variables NG_APP_SUPABASE_URL/KEY not set. Supabase client unavailable until runtime.');
+      }
     }
-    this.supabase = createClient(url, key);
   }
 
   // PUBLIC_INTERFACE
   /**
-   * Returns the singleton Supabase client instance.
+   * Returns the singleton Supabase client instance, or null if not available.
+   * Use SupabaseService.isAvailable() before calling, especially in SSR/prerender, to avoid breaking static build.
+   * Example:
+   *    if (SupabaseService.isAvailable()) {
+   *      const client = supabaseService.getClient();
+   *      // ... use client
+   *    } else {
+   *      // Render fallback or placeholder (SSR/static)
+   *    }
    */
-  public getClient(): SupabaseClient {
+  public getClient(): SupabaseClient | null {
     return this.supabase;
+  }
+
+  /**
+   * Returns true if Supabase environment variables and client are available (safe for use).
+   */
+  public static isAvailable(): boolean {
+    return !!(getEnvVar('NG_APP_SUPABASE_URL') && getEnvVar('NG_APP_SUPABASE_KEY'));
   }
 }

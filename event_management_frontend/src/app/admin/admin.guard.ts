@@ -21,7 +21,12 @@ export const adminGuard: CanActivateFn = async () => {
   // Using Angular's "inject" for composition in standalone guards
   const router = inject(Router);
   const supabase = inject(SupabaseService);
-  const { data: { user } } = await supabase.getClient().auth.getUser();
+  const client = supabase.getClient();
+  if (!client) {
+    router.navigate(['/auth/login']);
+    return false;
+  }
+  const { data: { user } } = await client.auth.getUser();
   if (!user) {
     router.navigate(['/auth/login']);
     return false;
