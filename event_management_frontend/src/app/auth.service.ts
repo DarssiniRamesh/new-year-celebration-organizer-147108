@@ -13,6 +13,7 @@ export class AuthService {
   private session$ = new BehaviorSubject<Session | null>(null);
   private user$ = new BehaviorSubject<User | null>(null);
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private supabaseService: SupabaseService) {
     // Set up listener for auth changes.
     this.supabaseService.getClient().auth.onAuthStateChange((event, session) => {

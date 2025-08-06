@@ -17,6 +17,7 @@ export class LoginComponent {
   error: string | null = null;
   loading = false;
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private auth: AuthService) {}
 
   // PUBLIC_INTERFACE

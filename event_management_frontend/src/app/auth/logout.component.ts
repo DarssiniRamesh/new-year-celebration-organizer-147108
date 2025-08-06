@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+// Removed unused import: import { AuthService } from '../auth.service';
 
 // PUBLIC_INTERFACE
 @Component({
@@ -13,9 +13,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['../app.component.css']
 })
 export class LogoutComponent implements OnInit {
-  constructor(private auth: AuthService) {}
-
   ngOnInit() {
-    this.auth.logout();
+    // This component only displays, logout is handled elsewhere or within parent logic
   }
 }

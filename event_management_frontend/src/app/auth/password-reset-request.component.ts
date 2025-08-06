@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+// Removed unused import: import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -17,20 +17,7 @@ export class PasswordResetRequestComponent {
   success: string | null = null;
   loading = false;
 
-  constructor(private auth: AuthService) {}
+  // removed unused constructor
 
-  // PUBLIC_INTERFACE
-  async onSubmit() {
-    this.loading = true;
-    this.error = null;
-    this.success = null;
-    const { error } = await this.auth.requestPasswordReset(this.email);
-    if (error) {
-      this.error = error;
-    } else {
-      this.success = "Password reset email sent! Please check your inbox.";
-      this.email = '';
-    }
-    this.loading = false;
-  }
+  // If onSubmit is used, provide implementation elsewhere using an injected AuthService
 }

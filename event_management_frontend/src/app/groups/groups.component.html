@@ -5,6 +5,12 @@
       <span class="group-name">{{g.name}}</span>
       <span class="group-id">#{{g.id}}</span>
     </div>
+    <!-- Room selection for first group if user is in a group -->
+    <app-room-selection
+      *ngIf="myGroups.length > 0"
+      [groupId]="myGroups[0]?.id"
+      [isOrganizer]="false">
+    </app-room-selection>
   </div>
   <ng-template #nogroups>
     <div class="hint muted">You are not in any groups yet.</div>

@@ -3,6 +3,7 @@ import { GroupService } from './group.service';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RoomSelectionComponent } from './room-selection.component';
 
 /**
  * GroupsComponent displays: user's memberships, lists all groups, allows group creation and joining.
@@ -12,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-groups',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RoomSelectionComponent],
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
@@ -32,7 +33,7 @@ export class GroupsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.user().subscribe(user => {
+    this.authService.user().subscribe((user: any) => {
       this.currentUserId = user?.id ?? null;
       if (this.currentUserId) {
         this.refresh();

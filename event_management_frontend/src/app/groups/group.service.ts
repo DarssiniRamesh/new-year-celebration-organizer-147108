@@ -20,14 +20,12 @@ export class GroupService {
   async createGroup(name: string, userId: string): Promise<{ error: string | null }> {
     try {
       const supabase = this.supabaseService.getClient();
-      // Insert into groups
       const { data, error } = await supabase
         .from(this.GROUPS_TABLE)
         .insert([{ name, created_by: userId }])
         .select()
         .single();
       if (error) return { error: error.message };
-      // Add creator as first member
       const groupId = data.id;
       await supabase.from(this.MEMBERS_TABLE).insert([{ group_id: groupId, user_id: userId }]);
       return { error: null };
@@ -60,7 +58,6 @@ export class GroupService {
   async joinGroup(groupId: string, userId: string): Promise<{ error: string | null }> {
     try {
       const supabase = this.supabaseService.getClient();
-      // Check if already a member
       const { data } = await supabase
         .from(this.MEMBERS_TABLE)
         .select('id')
