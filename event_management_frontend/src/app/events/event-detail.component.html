@@ -16,4 +16,9 @@
     <span class="participants-label">Joined:</span>
     <span *ngFor="let part of participants" class="participant">{{ part.user_id || '-' }}</span>
   </div>
+
+  <!-- Food Preferences Form (show only if joined) -->
+  <app-food-preferences *ngIf="joined"
+    [eventId]="eventId"
+  ></app-food-preferences>
 </div>

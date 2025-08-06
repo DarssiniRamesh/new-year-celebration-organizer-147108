@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { EventService } from './event.service';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { FoodPreferencesComponent } from './food-preferences.component';
 
 @Component({
   selector: 'app-event-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FoodPreferencesComponent],
   templateUrl: './event-detail.component.html',
   styleUrls: ['./event-detail.component.scss']
 })

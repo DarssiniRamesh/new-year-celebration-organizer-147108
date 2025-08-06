@@ -63,7 +63,7 @@ export class GroupService {
         .select('id')
         .eq('group_id', groupId)
         .eq('user_id', userId)
-        .single();
+        .maybeSingle();
       if (data) {
         return { error: 'Already a member of this group' };
       }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { GroupService } from './group.service';
-import { AuthService } from '../auth.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RoomSelectionComponent } from './room-selection.component';
+import { GroupService } from './group.service';
+import { AuthService } from '../auth.service';
 
 /**
  * GroupsComponent displays: user's memberships, lists all groups, allows group creation and joining.
@@ -27,8 +27,8 @@ export class GroupsComponent implements OnInit {
   newGroupName = '';
   currentUserId: string | null = null;
 
-  constructor() {}
-// Both params in constructor are actually needed for functions here.
+  private groupService = inject(GroupService);
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     this.authService.user().subscribe((user: any) => {

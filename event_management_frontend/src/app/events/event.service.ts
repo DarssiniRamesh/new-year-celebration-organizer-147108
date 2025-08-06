@@ -10,7 +10,10 @@ export class EventService {
   private EVENTS_TABLE = 'events';
   private PARTICIPANTS_TABLE = 'event_participants';
 
-  constructor() {}
+  constructor(supabaseService: SupabaseService) {
+    this.supabaseService = supabaseService;
+  }
+  private readonly supabaseService: SupabaseService;
 // Parameter is used, keep as is.
 
   /**
